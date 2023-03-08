@@ -13,7 +13,7 @@ async function performFetches() {
     const response3 = await $.ajax(
       `http://localhost:3000/phones?username=${username}`
     );
-    console.log(response3);
+    console.log(response3, response2, response1);
   } catch (error) {
     console.error(error);
   } finally {
@@ -22,6 +22,7 @@ async function performFetches() {
 }
 
 async function performInParallel(username) {
+  const fortyTwo = await 42;
   const fortyTwo = await new Promise((resolve) => resolve(42));
 
   const [phones, computers] = await Promise.all([
