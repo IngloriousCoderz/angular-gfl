@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
 
@@ -9,9 +8,11 @@ import { TaskService } from '../task.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  tasks$: Observable<Task[]> = this.taskService.getTasks();
+  tasks!: Task[];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) {
+    this.tasks = this.taskService.getTasks();
+  }
 
   handleSpanClick(index: number) {
     this.taskService.toggleCompleted(index);

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
 
@@ -8,10 +7,16 @@ import { TaskService } from '../task.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
-  tasks$: Observable<Task[]> = this.taskService.getTasks();
+export class ListComponent implements OnInit {
+  tasks!: Task[];
 
   constructor(private taskService: TaskService) {}
+
+  ngOnInit() {
+    this.taskService.getTasks().subscribe((tasks) => {
+      this.tasks = tasks;
+    });
+  }
 
   handleSpanClick(index: number) {
     this.taskService.toggleCompleted(index);

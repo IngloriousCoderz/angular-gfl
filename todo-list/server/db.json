@@ -1,0 +1,7 @@
+{
+  "tasks": [
+    { "id": 1, "text": "Learn Angular", "completed": true },
+    { "id": 2, "text": "Look for a job", "completed": false },
+    { "id": 3, "text": "Forget everything" }
+  ]
+}
