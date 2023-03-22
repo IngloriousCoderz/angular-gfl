@@ -1,0 +1,4 @@
+<form [formGroup]="form" (submit)="handleSubmit($event)">
+  <input placeholder="What next?" autofocus formControlName="text" />
+  <button [disabled]="form.status === 'INVALID'">Add</button>
+</form>

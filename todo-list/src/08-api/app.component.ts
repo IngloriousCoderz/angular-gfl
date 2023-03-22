@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { ListActions } from './app.actions';
+import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +7,9 @@ import { ListActions } from './app.actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private store: Store) {}
+  constructor(private taskService: TaskService) {}
 
   handleSubmit(text: string) {
-    this.store.dispatch(ListActions.addTask({ text }));
+    this.taskService.addTask(text).subscribe();
   }
 }

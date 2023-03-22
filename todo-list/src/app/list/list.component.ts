@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ListActions } from '../app.actions';
 import { Task } from '../task';
-import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-list',
@@ -9,15 +10,15 @@ import { TaskService } from '../task.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  tasks$: Observable<Task[]> = this.taskService.getTasks();
+  tasks$: Observable<Task[]> = this.store.select((state) => state.tasks);
 
-  constructor(private taskService: TaskService) {}
+  constructor(private store: Store<{ tasks: Task[] }>) {}
 
-  handleSpanClick(index: number) {
-    this.taskService.toggleCompleted(index);
+  handleSpanClick(id: number) {
+    this.store.dispatch(ListActions.toggleCompleted({ id }));
   }
 
-  handleButtonClick(index: number) {
-    this.taskService.removeTask(index);
+  handleButtonClick(id: number) {
+    this.store.dispatch(ListActions.removeTask({ id }));
   }
 }
