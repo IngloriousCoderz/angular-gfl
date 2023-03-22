@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ListActions } from '../app.actions';
 import { Task } from '../task';
+import { ListState, selectTasks } from './list.reducer';
 
 @Component({
   selector: 'app-list',
@@ -10,9 +11,9 @@ import { Task } from '../task';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  tasks$: Observable<Task[]> = this.store.select((state) => state.tasks);
+  tasks$: Observable<Task[]> = this.store.select(selectTasks);
 
-  constructor(private store: Store<{ tasks: Task[] }>) {}
+  constructor(private store: Store<ListState>) {}
 
   handleSpanClick(id: number) {
     this.store.dispatch(ListActions.toggleCompleted({ id }));

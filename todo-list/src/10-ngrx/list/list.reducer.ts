@@ -1,6 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { ListActions } from '../app.actions';
+import { Task } from '../task';
+
+export interface ListState {
+  tasks: Task[];
+}
 
 const initialState = [
   { id: 1, text: 'Learn Redux', completed: true },
@@ -26,3 +31,5 @@ export const listReducer = createReducer(
     return state.filter((task) => task.id !== id);
   })
 );
+
+export const selectTasks = (state: ListState) => state.tasks;
