@@ -1,19 +1,14 @@
-import {
-  addTask,
-  removeTask,
-  todoList,
-  toggleCompleted,
-} from './todo-list.reducer';
+import { listReducer } from './list.reducer';
+import { ListActions } from '../app.actions';
 
-describe('Todo List - Redux', () => {
+describe('Todo List - List Reducer', () => {
   it('should add a new task', () => {
-    // given
     const stateBefore = [
       { id: 1, text: 'Learn Redux', completed: true },
       { id: 2, text: 'Look for a job', completed: false },
       { id: 3, text: 'Forget everything' },
     ];
-    const action = addTask('New task');
+    const action = ListActions.addTask({ text: 'New task' });
     const stateAfter = [
       { id: 1, text: 'Learn Redux', completed: true },
       { id: 2, text: 'Look for a job', completed: false },
@@ -21,10 +16,8 @@ describe('Todo List - Redux', () => {
       { id: 4, text: 'New task' },
     ];
 
-    // when
-    const state = todoList(stateBefore, action);
+    const state = listReducer(stateBefore, action);
 
-    // then
     expect(state).toEqual(stateAfter);
   });
 
@@ -34,14 +27,14 @@ describe('Todo List - Redux', () => {
       { id: 2, text: 'Look for a job', completed: false },
       { id: 3, text: 'Forget everything' },
     ];
-    const action = toggleCompleted(2);
+    const action = ListActions.toggleCompleted({ id: 2 });
     const stateAfter = [
       { id: 1, text: 'Learn Redux', completed: true },
       { id: 2, text: 'Look for a job', completed: true },
       { id: 3, text: 'Forget everything' },
     ];
 
-    const state = todoList(stateBefore, action);
+    const state = listReducer(stateBefore, action);
 
     expect(state).toEqual(stateAfter);
   });
@@ -52,13 +45,13 @@ describe('Todo List - Redux', () => {
       { id: 2, text: 'Look for a job', completed: false },
       { id: 3, text: 'Forget everything' },
     ];
-    const action = removeTask(2);
+    const action = ListActions.removeTask({ id: 2 });
     const stateAfter = [
       { id: 1, text: 'Learn Redux', completed: true },
       { id: 3, text: 'Forget everything' },
     ];
 
-    const state = todoList(stateBefore, action);
+    const state = listReducer(stateBefore, action);
 
     expect(state).toEqual(stateAfter);
   });

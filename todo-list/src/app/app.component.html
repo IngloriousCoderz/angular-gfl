@@ -1,22 +1,2 @@
-<h1>Routing</h1>
-<nav>
-  <ul>
-    <li>
-      <a
-        routerLink="/home"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
-        >Home</a
-      >
-    </li>
-    <li>
-      <a
-        routerLink="/about"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
-        >About</a
-      >
-    </li>
-  </ul>
-</nav>
-<router-outlet></router-outlet>
+<app-form (formSubmit)="handleSubmit($event)" />
+<app-list />
